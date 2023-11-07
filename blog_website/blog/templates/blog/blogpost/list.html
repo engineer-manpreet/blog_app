@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+{% block title %}TECHINTA - InstaForTechGeeks{% endblock %}
+{% block content %}
+
+    {% for post in posts %}
+    <h2>
+        <a href="{% url 'blog:blogpost_detail' post.id %}">
+            {{ post.title }}
+        </a>
+    </h2>
+    <p class="date">
+        Published {{ post.published_at }} by {{ post.author }}
+    </p>
+    {{ post.body|truncatewords:30|linebreaks }}
+    {% endfor %}
+    {% include "pagination.html" with page=page_obj%}
+{% endblock %}
